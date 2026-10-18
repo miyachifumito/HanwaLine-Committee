@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>阪和線委員会公式サイト～JR東日本～</title>
+
+    <style>
+        /* =========================
+           基本設定
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: #263445;
+            background: #f3f6fa;
+            font-family:
+                "Yu Gothic",
+                "Hiragino Kaku Gothic ProN",
+                Meiryo,
+                sans-serif;
+            line-height: 1.8;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================
+           ヘッダー
+        ========================= */
+
+        .site-header {
+            position: relative;
+            overflow: hidden;
+            color: #fff;
+            background: linear-gradient(
+                135deg,
+                #10243e,
+                #183e63
+            );
+            border-bottom: 4px solid #b8c9da;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 34px 28px 30px;
+        }
+
+        .site-label {
+            display: inline-block;
+            margin-bottom: 12px;
+            padding: 4px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 4px;
+            color: #e2ebf5;
+            font-size: 12px;
+            letter-spacing: 0.12em;
+        }
+
+        .site-title {
+            margin: 0;
+            font-size: clamp(25px, 4vw, 40px);
+            font-weight: 700;
+            line-height: 1.4;
+            letter-spacing: 0.04em;
+        }
+
+        .site-subtitle {
+            margin: 10px 0 0;
+            color: #d2dfec;
+            font-size: 15px;
+            letter-spacing: 0.12em;
+        }
+
+        /* =========================
+           ナビゲーション
+        ========================= */
+
+        .site-nav {
+            background: #fff;
+            border-bottom: 1px solid #dce4ed;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px 34px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12px 20px;
+        }
+
+        .nav-inner a {
+            color: #344c66;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-inner a:hover {
+            color: #1674ad;
+        }
+
+        /* =========================
+           メインコンテンツ
+        ========================= */
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 24px 64px;
+        }
+
+        .section-heading {
+            margin: 0 0 8px;
+            color: #183653;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .section-description {
+            margin: 0 0 24px;
+            color: #738196;
+            font-size: 14px;
+        }
+
+        .heading-line {
+            width: 48px;
+            height: 4px;
+            margin-bottom: 14px;
+            border-radius: 2px;
+            background: #467fa8;
+        }
+
+        /* =========================
+           画像スライダー
+        ========================= */
+
+        .gallery-section {
+            margin-bottom: 48px;
+        }
+
+        .image-slider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 24px 0;
+            border: 1px solid #e0e7ef;
+            border-radius: 14px;
+            background: #e9eef4;
+        }
+
+        .image-slider-track {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            width: max-content;
+            will-change: transform;
+        }
+
+        .image-slide {
+            position: relative;
+            flex: 0 0 560px;
+            height: 360px;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #dce4ec;
+            box-shadow: 0 5px 18px rgba(20, 43, 67, 0.12);
+        }
+
+        .image-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-slide::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(
+                255,
+                255,
+                255,
+                var(--white-opacity, 0.75)
+            );
+            pointer-events: none;
+        }
+
+        /* =========================
+           メニュー
+        ========================= */
+
+        .menu-section {
+            margin-top: 42px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .menu-card {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            min-height: 112px;
+            padding: 22px;
+            border: 1px solid #e0e7ef;
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 3px 12px rgba(30, 53, 76, 0.04);
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s,
+                border-color 0.2s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-3px);
+            border-color: #b8ccdf;
+            box-shadow: 0 8px 22px rgba(30, 53, 76, 0.09);
+        }
+
+        .menu-number {
+            display: flex;
+            flex: 0 0 48px;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            color: #fff;
+            background: #183e63;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .menu-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .menu-title {
+            margin: 0;
+            color: #213b55;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .menu-description {
+            margin: 4px 0 0;
+            color: #8491a1;
+            font-size: 12px;
+        }
+
+        .menu-arrow {
+            color: #6e8ca9;
+            font-size: 22px;
+        }
+
+        /* =========================
+           フッター
+        ========================= */
+
+        .site-footer {
+            padding: 24px 20px;
+            border-top: 1px solid #dce4ed;
+            color: #738196;
+            background: #fff;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .site-footer p {
+            margin: 0;
+        }
+
+        /* =========================
+           スマートフォン対応
+        ========================= */
+
+        @media (max-width: 700px) {
+            .header-inner {
+                padding: 26px 20px;
+            }
+
+            .site-subtitle {
+                font-size: 13px;
+            }
+
+            .nav-inner {
+                justify-content: flex-start;
+                gap: 8px 22px;
+            }
+
+            main {
+                padding: 26px 16px 44px;
+            }
+
+            .section-heading {
+                font-size: 21px;
+            }
+
+            .image-slider {
+                padding: 14px 0;
+                border-radius: 10px;
+            }
+
+            .image-slider-track {
+                gap: 14px;
+            }
+
+            .image-slide {
+                flex-basis: 78vw;
+                height: 50vw;
+                max-height: 360px;
+                border-radius: 8px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .menu-card {
+                min-height: 94px;
+                padding: 18px;
+            }
+
+            .menu-title {
+                font-size: 15px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .menu-card,
+            .nav-inner a {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ヘッダー -->
+    <header class="site-header" id="top">
+        <div class="header-inner">
+            <span class="site-label">OFFICIAL WEBSITE</span>
+
+            <h1 class="site-title">
+                阪和線委員会公式サイト
+            </h1>
+
+            <p class="site-subtitle">
+                ～JR東日本～
+            </p>
+        </div>
+    </header>
+
+    <!-- ナビゲーション -->
+    <nav class="site-nav" aria-label="メインナビゲーション">
+        <div class="nav-inner">
+            <a href="#top">ホーム</a>
+            <a href="#gallery">フォトギャラリー</a>
+            <a href="#menu">コンテンツ</a>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- 画像ギャラリー -->
+        <section class="gallery-section" id="gallery">
+
+            <div class="heading-line"></div>
+
+            <h2 class="section-heading">
+                フォトギャラリー
+            </h2>
+
+            <p class="section-description">
+                阪和線委員会の写真をご覧いただけます。
+            </p>
+
+            <div class="image-slider" id="imageSlider">
+                <div class="image-slider-track">
+
+                    <div class="image-slide">
+                        <img src="images/image1.jpg" alt="画像1">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image2.jpg" alt="画像2">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image3.jpg" alt="画像3">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image4.jpg" alt="画像4">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image5.jpg" alt="画像5">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image6.jpg" alt="画像6">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image7.jpg" alt="画像7">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image8.jpg" alt="画像8">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image9.jpg" alt="画像9">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image10.jpg" alt="画像10">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image11.jpg" alt="画像11">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image12.jpg" alt="画像12">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image13.jpg" alt="画像13">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image14.jpg" alt="画像14">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image15.jpg" alt="画像15">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image16.jpg" alt="画像16">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image17.jpg" alt="画像17">
+                    </div>
+
+                    <div class="image-slide">
+                        <img src="images/image18.jpg" alt="画像18">
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- コンテンツメニュー -->
+        <section class="menu-section" id="menu">
+
+            <div class="heading-line"></div>
+
+            <h2 class="section-heading">
+                コンテンツ
+            </h2>
+
+            <p class="section-description">
+                各コンテンツはこちらからご覧いただけます。
+            </p>
+
+            <div class="menu-grid">
+
+                <a class="menu-card" href="#support">
+                    <span class="menu-number">01</span>
+
+                    <span class="menu-text">
+                        <span class="menu-title">
+                            補助放送について
+                        </span>
+
+                        <span class="menu-description">
+                            補助放送に関する情報
+                        </span>
+                    </span>
+
+                    <span class="menu-arrow" aria-hidden="true">›</span>
+                </a>
+
+                <a class="menu-card" href="#links">
+                    <span class="menu-number">02</span>
+
+                    <span class="menu-text">
+                        <span class="menu-title">
+                            リンク集
+                        </span>
+
+                        <span class="menu-description">
+                            関連サイト・おすすめリンク
+                        </span>
+                    </span>
+
+                    <span class="menu-arrow" aria-hidden="true">›</span>
+                </a>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- フッター -->
+    <footer class="site-footer">
+        <p>
+            阪和線委員会公式サイト
+        </p>
+    </footer>
+
+    <!-- 画像スライダーの動作 -->
+    <script>
+    (() => {
+        const slider = document.getElementById("imageSlider");
+
+        if (!slider || slider.dataset.initialized === "true") {
+            return;
+        }
+
+        slider.dataset.initialized = "true";
+
+        const track = slider.querySelector(".image-slider-track");
+
+        if (!track) return;
+
+        const originalSlides = Array.from(track.children);
+
+        if (originalSlides.length < 2) return;
+
+        // 画像の読み込み完了後に幅を計算する
+        originalSlides.forEach(slide => {
+            const img = slide.querySelector("img");
+
+            if (img && !img.complete) {
+                img.addEventListener("load", updateImages);
+            }
+        });
+
+        // 元の画像を複製して無限ループにする
+        originalSlides.forEach(slide => {
+            track.appendChild(slide.cloneNode(true));
+        });
+
+        let offset = 0;
+        let previousTime = 0;
+        let animationFrame = null;
+
+        const speed = 25;
+
+        function getLoopWidth() {
+            const first = originalSlides[0];
+            const last = originalSlides[originalSlides.length - 1];
+
+            return last.offsetLeft
+                + last.offsetWidth
+                - first.offsetLeft
+                + parseFloat(getComputedStyle(track).gap);
+        }
+
+        function updateImages() {
+            const sliderRect = slider.getBoundingClientRect();
+            const centerX = sliderRect.left + sliderRect.width / 2;
+            const maxDistance = Math.max(sliderRect.width * 0.65, 1);
+
+            track.querySelectorAll(".image-slide").forEach(slide => {
+                const rect = slide.getBoundingClientRect();
+                const slideCenter = rect.left + rect.width / 2;
+
+                const distance = Math.abs(slideCenter - centerX);
+
+                const intensity = Math.min(
+                    distance / maxDistance,
+                    1
+                );
+
+                slide.style.setProperty(
+                    "--white-opacity",
+                    (intensity * 0.65).toFixed(3)
+                );
+            });
+        }
+
+        function animate(time) {
+            if (!previousTime) previousTime = time;
+
+            const delta = Math.min(
+                (time - previousTime) / 1000,
+                0.05
+            );
+
+            previousTime = time;
+
+            const loopWidth = getLoopWidth();
+
+            if (loopWidth > 0) {
+                offset += speed * delta;
+
+                if (offset >= loopWidth) {
+                    offset %= loopWidth;
+                }
+            }
+
+            track.style.transform =
+                `translateX(${-offset}px)`;
+
+            updateImages();
+
+            animationFrame = requestAnimationFrame(animate);
+        }
+
+        function start() {
+            const first = originalSlides[0];
+
+            offset = Math.max(
+                0,
+                first.offsetLeft -
+                (slider.clientWidth - first.offsetWidth) / 2
+            );
+
+            track.style.transform =
+                `translateX(${-offset}px)`;
+
+            updateImages();
+
+            if (animationFrame !== null) {
+                cancelAnimationFrame(animationFrame);
+            }
+
+            previousTime = 0;
+            animationFrame = requestAnimationFrame(animate);
+        }
+
+        start();
+
+        window.addEventListener("resize", updateImages);
+
+        // タブが非表示の間はアニメーションを停止して負荷を抑える
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+                if (animationFrame !== null) {
+                    cancelAnimationFrame(animationFrame);
+                    animationFrame = null;
+                }
+
+                previousTime = 0;
+            } else if (animationFrame === null) {
+                previousTime = 0;
+                animationFrame = requestAnimationFrame(animate);
+            }
+        });
+
+    })();
+    </script>
+
+</body>
+</html>
